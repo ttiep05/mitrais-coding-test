@@ -1,0 +1,48 @@
+.formGrayOut {
+	background: #eee;
+}
+
+.registraionForm {
+	min-height: 480px;
+	border-radius: 8px;
+	background: #fafafa;
+}
+
+.page-footer {
+	margin-top: 20px;
+}
+
+#loginContainer {
+	min-height: 100px;
+}
+
+.mitrais {
+	background: #9b27b0;
+}
+
+.disabledbutton {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+.loginButton {
+	margin-top: -74px;
+}
+
+.popover-content {
+	color: white;
+	font-size: 12px;
+}
+
+.popover {
+	background-color: tomato;
+	width: 100%;
+}
+
+.popover.top>.arrow:after {
+	border-top-color: tomato;
+}
+
+#btnLogin {
+	color: inherit;
+}

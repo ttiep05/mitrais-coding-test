@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Example</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css"
+	href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+<script type="text/javascript" src="webjars/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body id="body">
+	<div id="pageContainer">
+		<nav class="navbar">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Teppi - Java Developer Coding
+						Test </a>
+				</div>
+			</div>
+		</nav>
+		<div id="regisContainer" class="container registraionForm">
+			<form class=" registraionForm" id="search-form">
+				<h1 class="col-md-12">Registraion</h1>
+				<div id="feedback" data-placement="top" data-html=true
+					class="form-group form-group-lg col-md-12"></div>
+				<div class="form-group form-group-lg col-md-12">
+					<input id="phoneNumber" type="text" placeholder="Mobile number"
+						class="form-control" />
+				</div>
+				<div class="form-group form-group-lg col-md-12">
+					<input type="text" placeholder="First Name" class="form-control"
+						id="firstName" />
+				</div>
+				<div class="form-group form-group-lg col-md-12">
+					<input id="lastName" type="text" placeholder="Last Name"
+						class="form-control" />
+				</div>
+
+				<div class="form-group col-md-12">
+					<label for="company">Date Of birth</label>
+					<div class="form-group  form-inline ">
+						<select id="month" class="form-control date-select">
+							<option value="" label="Month"></option>
+						</select> <select id="day" class="form-control  date-select">
+							<option value="" label="Day"></option>
+						</select> <select id="year" class="form-control  date-select">
+							<option value="" label="Year"></option>
+						</select>
+
+					</div>
+				</div>
+
+				<div class="form-group form-group-lg col-md-12 ">
+					<label class="radio-inline"><input type="radio"
+						name="gender" value="M">Male</label> <label class="radio-inline"><input
+						type="radio" name="gender" value="F">Female</label>
+				</div>
+				<div class="form-group form-group-lg col-md-12">
+					<input id="email" type="text" placeholder="Email"
+						class="form-control" />
+				</div>
+
+				<div class="form-group form-group-lg col-md-12">
+					<button type="submit" id="btnSubmit"
+						class="btn mitrais btn-lg col-sm-12">Register</button>
+				</div>
+			</form>
+		</div>
+
+		<!-- Footer -->
+		<footer class="page-footer font-small blue">
+			<div id="loginContainer" class="container mitrais text-center h-auto">
+				<h1>Footer</h1>
+
+			</div>
+		</footer>
+		<!-- Footer -->
+	</div>
+	<div class="container">
+		<div class="form-group form-group-lg col-md-12">
+			<a id="btnLogin"
+				class="btn mitrais btn-lg col-sm-12 loginButton hidden"
+				href="/login">Login</a>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>
