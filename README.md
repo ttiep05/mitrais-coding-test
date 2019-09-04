@@ -4,7 +4,8 @@ Tools
   - Eclipse version: 2019-06(4.12.0)
 
 SQL
-      DROP TABLE IF EXISTS registration CASCADE;
+       
+    DROP TABLE IF EXISTS registration CASCADE;
 
     CREATE TABLE registration
     (
