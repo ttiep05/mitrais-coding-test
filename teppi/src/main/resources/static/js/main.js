@@ -9,56 +9,48 @@ $(document).ready(function() {
 	});
 });
 
-function myBeforeSubmitFunction(a, b, node) {
-
-	console.log(a, b);
-
-	node.find('input:not([type="submit"]), select, textarea').attr('readonly',
-			'true');
-	node.append('<div class="ui active loader"></div>');
-
-}
-
 function submit_registraion() {
-	var registration = {}
-	registration["phoneNumber"] = $("#phoneNumber").val();
-	registration["firstName"] = $("#firstName").val();
-	registration["lastName"] = $("#lastName").val();
-	if ($('input[name=gender]:checked')) {
-		registration["gender"] = $('input[name=gender]:checked').val();
-	}
-	if (getDateOfBirth() !== "") {
-		registration["dateOfBirth"] = $("#year").val() + "/"
-				+ $("#month").val() + "/" + $("#day").val();
-	}
-
-	registration["email"] = $("#email").val();
-
-	// clearError();
+	
+	// Disable (Gray out) Register form 
 	formDisabled();
-
+	
 	$.ajax({
 		type : "POST",
 		contentType : "application/json",
 		url : "/registration",
-		data : JSON.stringify(registration),
+		data : JSON.stringify(getRegistrationValue()),
 		dataType : 'json',
 		cache : false,
 		timeout : 600000,
 		success : function(data) {
-			console.log("SUCCESS : ", data);
+			// If the data saved properly, display login button 
 			$("#btnLogin").removeClass('hidden');
 			clearError();
 
 		},
 		error : function(e) {
+			// If there is any error, enable the form and display the error message on top of the form (Register label)
 			formEndabled();
-			var json = "<h4>Ajax Response</h4><pre>" + e.responseText
-					+ "</pre>";
 			showError(e.responseJSON.msg);
-			console.log("ERROR : ", e);
 		}
 	});
+}
+
+function getRegistrationValue() {
+	var values = {}
+	values["phoneNumber"] = $("#phoneNumber").val();
+	values["firstName"] = $("#firstName").val();
+	values["lastName"] = $("#lastName").val();
+	if ($('input[name=gender]:checked')) {
+		values["gender"] = $('input[name=gender]:checked').val();
+	}
+	if (getDateOfBirth() !== "") {
+		values["dateOfBirth"] = $("#year").val() + "/"
+				+ $("#month").val() + "/" + $("#day").val();
+	}
+
+	values["email"] = $("#email").val();
+	return values;
 }
 
 function getDateOfBirth() {
