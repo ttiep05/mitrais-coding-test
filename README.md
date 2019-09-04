@@ -2,6 +2,8 @@
 
 Tools
   - Eclipse version: 2019-06(4.12.0)
+  - Java JDK8
+  - DB PostgreSQL
 
 SQL
        
