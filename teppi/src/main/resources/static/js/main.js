@@ -1,3 +1,7 @@
+
+/*
+ * Form ready.
+ */
 $(document).ready(function() {
 	genderYmd();
 	$("#search-form").submit(function(event) {
@@ -9,6 +13,9 @@ $(document).ready(function() {
 	});
 });
 
+/*
+ * Button registration click.
+ */
 function submit_registraion() {
 	
 	// Disable (Gray out) Register form 
@@ -36,6 +43,9 @@ function submit_registraion() {
 	});
 }
 
+/*
+ * Get registration value from form.
+ */
 function getRegistrationValue() {
 	var values = {}
 	values["phoneNumber"] = $("#phoneNumber").val();
@@ -53,6 +63,9 @@ function getRegistrationValue() {
 	return values;
 }
 
+/*
+ * Get Date of birth value.
+ */
 function getDateOfBirth() {
 	let year = $("#year").val();
 	let month = $("#month").val();
@@ -63,24 +76,39 @@ function getDateOfBirth() {
 	return $("#year").val() + "/" + $("#month").val() + "/" + $("#day").val();
 }
 
+/*
+ * Disable page.
+ */
 function formDisabled() {
 	$("#pageContainer").addClass("disabledbutton");
 }
 
+/*
+ * Enable page.
+ */
 function formEndabled() {
 	$("#pageContainer").removeClass("disabledbutton");
 }
 
+/*
+ * Show error pop over.
+ */
 function showError(errors) {
 
 	$('#feedback').attr('data-content', errors);
 	$('#feedback').popover('show');
 }
 
+/*
+ * Clear error pop over.
+ */
 function clearError() {
 	$('#feedback').popover('hide');
 }
 
+/*
+ * Get Year Month Day Selection.
+ */
 function genderYmd() {
 	const monthNames = [ "January", "February", "March", "April", "May",
 			"June", "July", "August", "September", "October", "November",

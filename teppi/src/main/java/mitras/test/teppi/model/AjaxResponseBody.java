@@ -2,6 +2,13 @@ package mitras.test.teppi.model;
 
 import org.springframework.util.StringUtils;
 
+/**
+ * Ajax response body for ajax request
+ * 
+ * @author TIEP KNIGHT
+ *
+ */
+
 public class AjaxResponseBody {
 
 	private String msg;

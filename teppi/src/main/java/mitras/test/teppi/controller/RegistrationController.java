@@ -16,6 +16,12 @@ import mitras.test.teppi.model.AjaxResponseBody;
 import mitras.test.teppi.model.Registration;
 import mitras.test.teppi.respository.RegistrationRepository;
 
+/**
+ * Registration controller
+ * 
+ * @author TIEP KNIGHT
+ *
+ */
 @RestController
 public class RegistrationController {
 
