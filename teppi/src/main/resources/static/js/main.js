@@ -120,7 +120,6 @@ function genderYmd() {
 	var currentYear = new Date().getFullYear();
 
 	for (var y = 0; y <= qntYears; y++) {
-		let date = new Date(currentYear);
 		var yearElem = document.createElement("option");
 
 		yearElem.value = currentYear
@@ -160,17 +159,10 @@ function genderYmd() {
 
 		// lets create the days of that month
 		for (var d = 1; d <= days; d++) {
-			var dayElem = document.createElement("option");
-			dayElem.value = d;
-			dayElem.textContent = d;
-			selectDay.append(dayElem);
+			var dayE = document.createElement("option");
+			dayE.value = d;
+			dayE.textContent = d;
+			selectDay.append(dayE);
 		}
-	}
-
-	function adjustValueDate(date) {
-		if (date < 10) {
-			return "0" + date;
-		}
-		return date;
 	}
 }

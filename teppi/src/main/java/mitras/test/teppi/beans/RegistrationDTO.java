@@ -1,47 +1,29 @@
-package mitras.test.teppi.model;
+package mitras.test.teppi.beans;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "registration")
-public class Registration extends AuditModel {
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(generator = "registration_generator")
-	@SequenceGenerator(name = "registration_generator", sequenceName = "registration_sequence", initialValue = 1000)
-	private Integer id;
-
-	@Column(name = "phone_number")
+public class RegistrationDTO {
+	@NotBlank(message = "Mobile number is required.")
+	@Pattern(regexp = "[0-9\\.\\-\\s+\\/()]+", message = "Mobile number should validate valid phone number.")
+	@Size(min = 10, message = "Mobile number should be at least 10 characters")
 	private String phoneNumber;
 
-	@Column(name = "first_name")
+	@NotBlank(message = "First name is required.")
 	private String firstName;
 
-	@Column(name = "last_name")
+	@NotBlank(message = "Last name is required.")
 	private String lastName;
 
-	@Column(name = "date_of_birth")
 	private String dateOfBirth;
 
-	@Column(name = "gender")
 	private String gender;
 
-	@Column(name = "email")
+	@NotBlank(message = "Email is required.")
+	@Email
 	private String email;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;

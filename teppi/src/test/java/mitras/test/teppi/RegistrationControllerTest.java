@@ -21,10 +21,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
+import mitras.test.teppi.beans.RegistrationDTO;
 import mitras.test.teppi.controller.RegistrationController;
 import mitras.test.teppi.model.AjaxResponseBody;
 import mitras.test.teppi.model.Registration;
-import mitras.test.teppi.respository.RegistrationRepository;
+import mitras.test.teppi.services.RegistrationService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,7 +34,7 @@ import mitras.test.teppi.respository.RegistrationRepository;
 public class RegistrationControllerTest {
 
 	@MockBean
-	private RegistrationRepository regisRepository;
+	private RegistrationService regisService;
 
 	@Autowired
 	private RegistrationController controller;
@@ -41,35 +42,23 @@ public class RegistrationControllerTest {
 	@Test
 	public void testSaveRegistrationsOk() {
 		BindingResult errors = mock(BindingResult.class);
-		Registration regis = mockRegistration();
-		when(regisRepository.save(any(Registration.class))).thenReturn(regis);
+		RegistrationDTO regis = mock(RegistrationDTO.class);
+		AjaxResponseBody reponse = mockAjaxReponseBody();
+		when(regisService.addRegistration(any(RegistrationDTO.class))).thenReturn(reponse);
 		ResponseEntity<?> result = controller.saveRegistration(regis, errors);
 		AjaxResponseBody bodyResult = (AjaxResponseBody) result.getBody();
-		assertEquals(result.getStatusCode(), HttpStatus.OK);
+		assertEquals(HttpStatus.OK, result.getStatusCode());
 		assertEquals(bodyResult.getData(), regis);
 	}
 
 	@Test
 	public void testSaveRegistrationValidateModel() {
 		BindingResult errors = mock(BindingResult.class);
-		Registration regis = mockRegistration();
+		RegistrationDTO regis = mock(RegistrationDTO.class);
 		Mockito.when(errors.hasErrors()).thenReturn(true);
 		Mockito.when(errors.getAllErrors()).thenReturn(new ArrayList<ObjectError>());
 		ResponseEntity<?> result = controller.saveRegistration(regis, errors);
-		assertEquals(result.getStatusCode(), HttpStatus.BAD_REQUEST);
-	}
-
-	@Test
-	public void testSaveRegistrationValidateDb() {
-		BindingResult errors = mock(BindingResult.class);
-		Registration regis = mockRegistration();
-		when(regisRepository.findByPhoneNumber(any(String.class))).thenReturn(regis);
-		when(regisRepository.findByEmail(any(String.class))).thenReturn(regis);
-		ResponseEntity<?> result = controller.saveRegistration(regis, errors);
-		AjaxResponseBody bodyResult = (AjaxResponseBody) result.getBody();
-		assertEquals(result.getStatusCode(), HttpStatus.BAD_REQUEST);
-		assertEquals(bodyResult.getMsg().contains("Email should be unique."), true);
-		assertEquals(bodyResult.getMsg().contains("Mobile number should be unique."), true);
+		assertEquals(HttpStatus.BAD_REQUEST, result.getStatusCode());
 	}
 
 	private Registration mockRegistration() {
@@ -78,6 +67,12 @@ public class RegistrationControllerTest {
 		mock.setFirstName("Tiep");
 		mock.setLastName("Tran");
 		mock.setEmail("ttiep05@gmail.com");
+		return mock;
+	}
+
+	private AjaxResponseBody mockAjaxReponseBody() {
+		AjaxResponseBody mock = new AjaxResponseBody();
+		mock.setData(mockRegistration());
 		return mock;
 	}
 }

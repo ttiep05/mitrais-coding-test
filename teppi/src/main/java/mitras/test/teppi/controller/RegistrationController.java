@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import mitras.test.teppi.beans.RegistrationDTO;
 import mitras.test.teppi.model.AjaxResponseBody;
-import mitras.test.teppi.model.Registration;
-import mitras.test.teppi.respository.RegistrationRepository;
+import mitras.test.teppi.services.RegistrationService;
 
 /**
  * Registration controller
@@ -26,32 +27,24 @@ import mitras.test.teppi.respository.RegistrationRepository;
 public class RegistrationController {
 
 	@Autowired
-	private RegistrationRepository registrationRepo;
+	private RegistrationService registrationService;
 
 	@PostMapping("/registration")
-	public ResponseEntity<?> saveRegistration(@Valid @RequestBody Registration registration, BindingResult errors) {
-		AjaxResponseBody result = new AjaxResponseBody();
+	public ResponseEntity<AjaxResponseBody> saveRegistration(@Valid @RequestBody RegistrationDTO registration,
+			BindingResult errors) {
+		AjaxResponseBody result = null;
 
 		if (errors.hasErrors()) {
-			result.setMsg(errors.getAllErrors().stream().map(x -> x.getDefaultMessage())
+			result = new AjaxResponseBody();
+			result.setMsg(errors.getAllErrors().stream().map(ObjectError::getDefaultMessage)
 					.collect(Collectors.joining("<br />")));
 			return ResponseEntity.badRequest().body(result);
 		}
 
-		if (registrationRepo.findByPhoneNumber(registration.getPhoneNumber()) != null) {
-			result.addMsg("Mobile number should be unique.");
-		}
-
-		if (registrationRepo.findByEmail(registration.getEmail()) != null) {
-			result.addMsg("Email should be unique.");
-		}
-
+		result = registrationService.addRegistration(registration);
 		if (!StringUtils.isEmpty(result.getMsg())) {
 			return ResponseEntity.badRequest().body(result);
 		}
-
-		Registration regis = registrationRepo.save(registration);
-		result.setData(regis);
 
 		return ResponseEntity.ok(result);
 	}
