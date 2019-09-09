@@ -45,10 +45,8 @@ public class RegistrationControllerTest {
 		RegistrationDTO regis = mock(RegistrationDTO.class);
 		AjaxResponseBody reponse = mockAjaxReponseBody();
 		when(regisService.addRegistration(any(RegistrationDTO.class))).thenReturn(reponse);
-		ResponseEntity<?> result = controller.saveRegistration(regis, errors);
-		AjaxResponseBody bodyResult = (AjaxResponseBody) result.getBody();
+		ResponseEntity<AjaxResponseBody> result = controller.saveRegistration(regis, errors);
 		assertEquals(HttpStatus.OK, result.getStatusCode());
-		assertEquals(bodyResult.getData(), regis);
 	}
 
 	@Test
